@@ -10,7 +10,7 @@ use Jasny\Event\EventLoop;
 /**
  * @covers Jasny\Event
  */
-class EventLoopTest extends TestCase
+class EventTest extends TestCase
 {
     use TestHelper;
     
