@@ -1,11 +1,11 @@
 Jasny Event
 ===
 
-[![Build Status](https://travis-ci.org/jasny/event.svg?branch=master)](https://travis-ci.org/jasny/{{library}})
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/jasny/event/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/jasny/{{library}}/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/jasny/event/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/jasny/{{library}}/?branch=master)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/a1a1745c-1272-46a3-9567-7bbb52acda5a/mini.png)](https://insight.sensiolabs.com/projects/a1a1745c-1272-46a3-9567-7bbb52acda5a)[![Packagist Stable Version](https://img.shields.io/packagist/v/jasny/event.svg)](https://packagist.org/packages/jasny/{{library}})
-[![Packagist License](https://img.shields.io/packagist/l/jasny/event.svg)](https://packagist.org/packages/jasny/{{library}})
+[![Build Status](https://travis-ci.org/jasny/event.svg?branch=master)](https://travis-ci.org/jasny/event)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/jasny/event/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/jasny/event/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/jasny/event/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/jasny/event/?branch=master)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/a1a1745c-1272-46a3-9567-7bbb52acda5a/mini.png)](https://insight.sensiolabs.com/projects/a1a1745c-1272-46a3-9567-7bbb52acda5a)[![Packagist Stable Version](https://img.shields.io/packagist/v/jasny/event.svg)](https://packagist.org/packages/jasny/event)
+[![Packagist License](https://img.shields.io/packagist/l/jasny/event.svg)](https://packagist.org/packages/jasny/event)
 
 A simple event loop implementation. Aim is to make it easier to work with non-blocking streams, async queries, etc in PHP.
 
