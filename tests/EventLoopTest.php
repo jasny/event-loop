@@ -64,7 +64,7 @@ class EventLoopTest extends TestCase
         
         new EventLoop(function() use ($event) {
             EventLoop::current()->addEvent($event);
-        });
+        }, ['duration' => 0]);
     }
     
     public function testLoopMultipleEvents()
@@ -89,8 +89,24 @@ class EventLoopTest extends TestCase
             foreach ($events as $event) {
                 EventLoop::current()->addEvent($event);
             }
-        });
+        }, ['duration' => 0]);
         
         $this->assertSame([2, 0, 3, 4, 1], $order);
+    }
+    
+    public function testSleepUntil()
+    {
+        $event = $this->createMock(EventInterface::class);
+        $event->expects($this->exactly(3))->method('tick')->id('tick')
+            ->willReturnOnConsecutiveCalls(false, false, true);
+        $event->expects($this->once())->method('finish')->after('tick');
+        
+        $startime = microtime(true);
+        
+        new EventLoop(function() use ($event) {
+            EventLoop::current()->addEvent($event);
+        }, ['duration' => 150]);
+        
+        $this->assertGreaterThan(300, (int)(1000 * (microtime(true) - $startime)));
     }
 }

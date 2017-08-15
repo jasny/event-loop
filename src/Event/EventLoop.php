@@ -27,13 +27,24 @@ class EventLoop
      */
     protected $done = [];
     
+    /**
+     * Minimum duration between ticks in miliseconds
+     * @var int
+     */
+    protected $duration = 100;
+    
     
     /**
      * @param callable $main
+     * @param array    $options
      */
-    public function __construct(callable $main)
+    public function __construct(callable $main, $options = [])
     {
         array_unshift(static::$loops, $this);
+        
+        if (isset($options['duration'])) {
+            $this->duration = $options['duration'];
+        }
         
         $main();
         $this->loop();
@@ -44,7 +55,12 @@ class EventLoop
      */
     protected function loop()
     {
+        $startTime = 0;
+        
         while(!empty($this->running) || !empty($this->done)) {
+            $this->sleepUntil($startTime + ($this->duration / 1000));
+            $startTime = microtime(true);
+            
             $this->tick();
             $this->finish();
         }
@@ -76,6 +92,20 @@ class EventLoop
         
         if ($event) {
             $event->finish();
+        }
+    }
+    
+    /**
+     * Sleep until a specific microtime
+     * 
+     * @param int $time
+     */
+    protected function sleepUntil($time)
+    {
+        $sleep = $time - microtime(true);
+        
+        if ($sleep > 0) {
+            usleep($sleep * 1000000);
         }
     }
     
