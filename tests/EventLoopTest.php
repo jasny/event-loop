@@ -105,8 +105,8 @@ class EventLoopTest extends TestCase
         
         new EventLoop(function() use ($event) {
             EventLoop::current()->addEvent($event);
-        }, ['duration' => 150]);
+        }, ['duration' => 150000]);
         
-        $this->assertGreaterThan(300, (int)(1000 * (microtime(true) - $startime)));
+        $this->assertGreaterThan(300000, (int)(microtime(true) - $startime));
     }
 }

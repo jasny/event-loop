@@ -28,10 +28,10 @@ class EventLoop
     protected $done = [];
     
     /**
-     * Minimum duration between ticks in miliseconds
+     * Minimum duration between ticks in microseconds
      * @var int
      */
-    protected $duration = 100;
+    protected $duration = 1000;
     
     
     /**
@@ -58,7 +58,7 @@ class EventLoop
         $startTime = 0;
         
         while(!empty($this->running) || !empty($this->done)) {
-            $this->sleepUntil($startTime + ($this->duration / 1000));
+            $this->sleepUntil($startTime + $this->duration);
             $startTime = microtime(true);
             
             $this->tick();

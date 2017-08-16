@@ -37,7 +37,7 @@ class ReadStreamEvent extends Event
 
     public function tick()
     {
-        $data = fread($this->fd, 1024);
+        $data = fread($this->fd, 10240);
         $this->data .= $data;
 
         return $data === EOF;
