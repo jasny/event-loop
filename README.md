@@ -24,7 +24,7 @@ if it's done or not. If the event is done, the `trigger()` method is called, whi
 ```php
 use Jasny\Event;
 
-class ReadStreamEvent extends
+class ReadStreamEvent extends Event
 {
     protected $fd;
     protected $data;
