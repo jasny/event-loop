@@ -58,7 +58,7 @@ class EventLoop
         $startTime = 0;
         
         while(!empty($this->running) || !empty($this->done)) {
-            $this->sleepUntil($startTime + $this->duration);
+            $this->sleepUntil($startTime + ($this->duration / 1000000));
             $startTime = microtime(true);
             
             $this->tick();
@@ -103,7 +103,7 @@ class EventLoop
     protected function sleepUntil($time)
     {
         $sleep = $time - microtime(true);
-        
+
         if ($sleep > 0) {
             usleep($sleep * 1000000);
         }
