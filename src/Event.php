@@ -1,8 +1,8 @@
 <?php
 
-namespace Jasny;
+namespace Jasny\Event;
 
-use Jasny\EventInterface;
+use Jasny\Event\EventInterface;
 use Jasny\Event\EventLoop;
 
 /**
@@ -58,13 +58,21 @@ abstract class Event implements EventInterface
     public final function finish()
     {
         $this->trigger($this->callback);
+        $this->cleanup();
     }
     
     /**
      * Trigger the callback
      */
-    public function trigger($callback)
+    protected function trigger($callback)
     {
         $callback();
+    }
+    
+    /**
+     * Cleanup when done
+     */
+    protected function cleanup()
+    {
     }
 }

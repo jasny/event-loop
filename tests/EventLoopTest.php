@@ -1,10 +1,12 @@
 <?php
 
+namespace Jasny\Event;
+
 use PHPUnit_Framework_TestCase as TestCase;
 use Jasny\TestHelper;
 
 use Jasny\Event\EventLoop;
-use Jasny\EventInterface;
+use Jasny\Event\EventInterface;
 
 /**
  * @covers Jasny\Event\EventLoop
@@ -105,7 +107,7 @@ class EventLoopTest extends TestCase
         
         new EventLoop(function() use ($event) {
             EventLoop::current()->addEvent($event);
-        }, ['duration' => 150000]);
+        }, ['ticktime' => 150000]);
         
         $this->assertGreaterThan(300000, (int)((microtime(true) - $startime) * 1000000));
     }

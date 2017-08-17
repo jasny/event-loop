@@ -2,7 +2,7 @@
 
 namespace Jasny\Event;
 
-use Jasny\EventInterface;
+use Jasny\Event\EventInterface;
 
 /**
  * The event loop manager
@@ -28,10 +28,10 @@ class EventLoop
     protected $done = [];
     
     /**
-     * Minimum duration between ticks in microseconds
+     * Minimum ticktime between ticks in microseconds
      * @var int
      */
-    protected $duration = 0;
+    protected $ticktime = 0;
     
     
     /**
@@ -42,8 +42,8 @@ class EventLoop
     {
         array_unshift(static::$loops, $this);
         
-        if (isset($options['duration'])) {
-            $this->duration = $options['duration'];
+        if (isset($options['ticktime'])) {
+            $this->ticktime = $options['ticktime'];
         }
         
         $main();
@@ -58,7 +58,7 @@ class EventLoop
         $startTime = 0;
         
         while(!empty($this->running) || !empty($this->done)) {
-            $this->sleepUntil($startTime + ($this->duration / 1000000));
+            $this->sleepUntil($startTime + ($this->ticktime / 1000000));
             $startTime = microtime(true);
             
             $this->tick();

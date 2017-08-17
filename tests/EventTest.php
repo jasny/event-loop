@@ -1,14 +1,16 @@
 <?php
 
+namespace Jasny\Event;
+
 use PHPUnit_Framework_TestCase as TestCase;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
 use Jasny\TestHelper;
 
-use Jasny\Event;
+use Jasny\Event\Event;
 use Jasny\Event\EventLoop;
 
 /**
- * @covers Jasny\Event
+ * @covers Jasny\Event\Event
  */
 class EventTest extends TestCase
 {
@@ -23,14 +25,14 @@ class EventTest extends TestCase
     {
         $this->loop = $this->createMock(EventLoop::class);
         
-        $refl = new ReflectionProperty(EventLoop::class, 'loops');
+        $refl = new \ReflectionProperty(EventLoop::class, 'loops');
         $refl->setAccessible(true);
         $refl->setValue(null, [$this->loop]);
     }
     
     protected function endLoop()
     {
-        $refl = new ReflectionProperty(EventLoop::class, 'loops');
+        $refl = new \ReflectionProperty(EventLoop::class, 'loops');
         $refl->setAccessible(true);
         $refl->setValue(null, []);
     }

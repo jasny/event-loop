@@ -1,6 +1,6 @@
 <?php
 
-namespace Jasny;
+namespace Jasny\Event;
 
 /**
  * Inteface for a non-blocking event

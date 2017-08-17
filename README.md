@@ -22,15 +22,19 @@ Create an event object that implements `EventInterface`. On `tick()` it can perf
 if it's done or not. If the event is done, the `trigger()` method is called, which should invoke the callback.
 
 ```php
-use Jasny\Event;
+use Jasny\Event\Event;
 
 class ReadStreamEvent extends Event
 {
     protected $fd;
     protected $data;
 
-    protected function run($fd)
+    protected function run($fd = null)
     {
+        if (!is_resource($fd)) {
+            throw new \InvalidArgumentException("Expected a resource");
+        }
+
         stream_set_blocking($fd, false);
         $this->fd = $fd;
     }
@@ -40,13 +44,19 @@ class ReadStreamEvent extends Event
         $data = fread($this->fd, 10240);
         $this->data .= $data;
 
-        return $data === EOF;
+        return feof($data);
     }
 
-    public function trigger($callback)
+    protected function trigger($callback)
     {
         $callback($this->data);
     }
+
+    protected function cleanup()
+    {
+        fclose($this->fd);
+        $this->data = null;
+    } 
 }
 ```
 
@@ -56,8 +66,8 @@ Create a new event loop, passing the a main function which may create events.
 use Jasny\Event\EventLoop;
 
 new EventLoop(function() {
-    $fd = fopen('path/to/some-large-file.txt');
-    new ReadStreamEvent($fd, function(result) { echo $result; });
+    $fd = fopen('path/to/file.txt', 'r');
+    new ReadStreamEvent($fd, function($result) { echo $result; });
 });
 ```
 
