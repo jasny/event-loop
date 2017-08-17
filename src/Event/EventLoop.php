@@ -31,7 +31,7 @@ class EventLoop
      * Minimum duration between ticks in microseconds
      * @var int
      */
-    protected $duration = 1000;
+    protected $duration = 0;
     
     
     /**
