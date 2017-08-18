@@ -28,7 +28,7 @@ class EventLoop
     protected $done = [];
     
     /**
-     * Minimum ticktime between ticks in microseconds
+     * Minimum duration of a tick in microseconds
      * @var int
      */
     protected $ticktime = 0;
