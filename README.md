@@ -38,21 +38,47 @@ _Note that `tick()` method is not related to PHP ticks._
 ```php
 use Jasny\Event\Event;
 
-class ReadStreamEvent extends Event
+/**
+ * Event for asynchronous read of a file.
+ */
+class ReadFileEvent extends Event
 {
+    /**
+     * @var resource  non-blocking IO
+     */
     protected $fd;
+    
+    /**
+     * @var string  read data
+     */
     protected $data;
 
-    protected function run($fd = null)
+    /**
+     * This method is called when the event is created with the intent to initiate the IO operation.
+     *
+     * @param string $filename
+     */
+    protected function run($filename = null)
     {
-        if (!is_resource($fd)) {
-            throw new \InvalidArgumentException("Expected a resource");
+        if (!is_string($filename)) {
+            throw new \InvalidArgumentException("Expected a filename");
         }
+        
+        $fd = fopen($filename, 'r');
 
+        if (!is_resource($fd)) {
+            throw new \RuntimeException("Failed to open file '$filename'");
+        }
+        
         stream_set_blocking($fd, false);
         $this->fd = $fd;
     }
 
+    /**
+     * Called each time between resolving events.
+     *
+     * @returns boolean  true indicates the operation is finished
+     */
     public function tick()
     {
         $data = fread($this->fd, 10240);
@@ -61,11 +87,19 @@ class ReadStreamEvent extends Event
         return feof($data);
     }
 
+    /**
+     * Called when the operation is finished
+     *
+     * @param callable $callback
+     */
     protected function trigger($callback)
     {
         $callback($this->data);
     }
 
+    /**
+     * Clean up after the event is handled.
+     */
     protected function cleanup()
     {
         fclose($this->fd);
@@ -80,8 +114,11 @@ Create a new event loop, passing the a main function which may create events.
 use Jasny\Event\EventLoop;
 
 new EventLoop(function() {
-    $fd = fopen('path/to/file.txt', 'r');
-    new ReadStreamEvent($fd, function($result) { echo $result; });
+    // Do something here
+    
+    new ReadFileEvent('path/to/file.txt', function($result) { echo $result; });
+    
+    // Continue doing things here
 });
 ```
 
