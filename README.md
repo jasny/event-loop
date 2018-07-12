@@ -1,12 +1,10 @@
 Simple Event loop
 ===
 
-[![Build Status](https://travis-ci.org/jasny/event.svg?branch=master)](https://travis-ci.org/jasny/event)
+[![Build Status](https://travis-ci.org/jasny/event-loop.svg?branch=master)](https://travis-ci.org/jasny/event-loop)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/jasny/event/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/jasny/event/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/jasny/event/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/jasny/event/?branch=master)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/a1a1745c-1272-46a3-9567-7bbb52acda5a/mini.png)](https://insight.sensiolabs.com/projects/a1a1745c-1272-46a3-9567-7bbb52acda5a)
-[![Packagist Stable Version](https://img.shields.io/packagist/v/jasny/event.svg)](https://packagist.org/packages/jasny/event)
-[![Packagist License](https://img.shields.io/packagist/l/jasny/event.svg)](https://packagist.org/packages/jasny/event)
 
 **This library is not intended for production use, but to show PHP developers how an [event loop](https://en.wikipedia.org/wiki/Event_loop) works.**
 
